@@ -163,6 +163,7 @@ public class SupplierOrderController extends AbstractController {
 		} catch (Exception e) {
 			search_lable.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
 			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setTitle("Invalid input");
 			alert.setHeaderText(null);
 			alert.setContentText("Input entered is not valid please try again");
@@ -205,7 +206,7 @@ public class SupplierOrderController extends AbstractController {
 		// supplier did not select any row
 		else {
 			Alert alert = new Alert(AlertType.ERROR);
-			// alert.setTitle("Error Dialog");
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setHeaderText("Selection Error");
 			alert.setContentText("Sorry, no order detected");
 			alert.showAndWait();
@@ -250,6 +251,7 @@ public class SupplierOrderController extends AbstractController {
 
 				// show alert before execute deleting
 				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.initOwner(MainClientGUI.primaryStage);
 				alert.setTitle("Delete");
 				alert.setHeaderText("If you click ok the order will delte");
 				alert.setContentText("Are you sure?");
@@ -266,6 +268,14 @@ public class SupplierOrderController extends AbstractController {
 
 					// refresh for table after delete
 					switchScenes("/client/boundry/SupplierOrdersForm.fxml", "/client/boundry/SupplierWelcomeCss.css");
+					Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+					alert2.initOwner(MainClientGUI.primaryStage);
+					alert2.getButtonTypes().remove(ButtonType.CANCEL);
+					alert2.setTitle("Order remove");
+					alert2.setContentText(String.format("The order has been removed"));
+					alert2.initOwner(MainClientGUI.primaryStage.getOwner());
+					alert2.showAndWait();
+					
 				}
 
 				// supplier regret delete and press cancel
@@ -277,6 +287,7 @@ public class SupplierOrderController extends AbstractController {
 			// order is not complete, can not delete
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(MainClientGUI.primaryStage);
 				alert.setHeaderText("Check status");
 				alert.setContentText("Sorry, unable to delete incomplete order");
 				alert.showAndWait();
@@ -287,6 +298,7 @@ public class SupplierOrderController extends AbstractController {
 		// supplier did not select any row
 		else {
 			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(MainClientGUI.primaryStage);
 			// alert.setTitle("Error Dialog");
 			alert.setHeaderText("Selection Error");
 			alert.setContentText("Sorry, no order detected");
@@ -321,6 +333,7 @@ public class SupplierOrderController extends AbstractController {
 					|| order_table.getSelectionModel().getSelectedItem().getStatus().toString().equals("New")) {
 
 				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.initOwner(MainClientGUI.primaryStage);
 				alert.setHeaderText("Status");
 				alert.setContentText("Are you sure want to change status to complete?");
 				Optional<ButtonType> result = alert.showAndWait();
@@ -329,6 +342,13 @@ public class SupplierOrderController extends AbstractController {
 							+ order_table.getSelectionModel().getSelectedItem().getOrderTag();
 					Message message = new Message(MessageType.UPDATEINFO, "update_btn_clicked", query);
 					MainClientGUI.client.handleMessageFromClientUI(message);
+					Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+					alert2.initOwner(MainClientGUI.primaryStage);
+					alert2.getButtonTypes().remove(ButtonType.CANCEL);
+					alert2.setTitle("Status complete");
+					alert2.setContentText(String.format("The status has been changed"));
+					alert2.initOwner(MainClientGUI.primaryStage.getOwner());
+					alert2.showAndWait();
 
 					// ******update fuel reserves******//
 
@@ -344,6 +364,7 @@ public class SupplierOrderController extends AbstractController {
 
 				} else {
 					Alert alert2 = new Alert(AlertType.ERROR);
+					alert2.initOwner(MainClientGUI.primaryStage);
 					alert2.setHeaderText("Confirmation Error");
 					alert2.setContentText("Updating the order has failed");
 					alert2.showAndWait();
@@ -351,6 +372,7 @@ public class SupplierOrderController extends AbstractController {
 
 			} else {
 				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(MainClientGUI.primaryStage);
 				// alert.setTitle("Error Dialog");
 				alert.setHeaderText("Status Error");
 				alert.setContentText("Sorry, unable to complete this order");
@@ -360,7 +382,7 @@ public class SupplierOrderController extends AbstractController {
 		// supplier does not choose any row
 		else {
 			Alert alert = new Alert(AlertType.ERROR);
-			// alert.setTitle("Error Dialog");
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setHeaderText("Selection Error");
 			alert.setContentText("Sorry, no order detected");
 			alert.showAndWait();

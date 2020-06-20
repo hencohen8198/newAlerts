@@ -228,6 +228,8 @@ public class MarketingManagerDiscountEditFuelPriceController extends AbstractCon
 					@Override
 					public void run() {
 						Alert alert1 = new Alert(AlertType.INFORMATION);
+						alert1.initOwner(MainClientGUI.primaryStage);
+						alert1.getButtonTypes().remove(ButtonType.CANCEL);
 						alert1.setTitle("Request for approve");
 						alert1.setHeaderText(null);
 						alert1.setContentText("The price updated successfully");
@@ -242,6 +244,7 @@ public class MarketingManagerDiscountEditFuelPriceController extends AbstractCon
 					@Override
 					public void run() {
 						Alert alert = new Alert(AlertType.WARNING);
+						alert.initOwner(MainClientGUI.primaryStage);
 						alert.setTitle("Wrong Input");
 						alert.setHeaderText(null);
 						alert.setContentText("Please enter vaild input");
@@ -269,6 +272,7 @@ public class MarketingManagerDiscountEditFuelPriceController extends AbstractCon
 	 */
     public void exitFromScreenAlert(String form, String css) {
 		Alert alert = new Alert(AlertType.WARNING, "Are you sure you want to exit?", ButtonType.YES, ButtonType.NO);
+		alert.initOwner(MainClientGUI.primaryStage);
 		alert.setTitle("Back");
 		alert.setHeaderText(null);
 		alert.showAndWait();

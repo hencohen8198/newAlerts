@@ -190,6 +190,13 @@ public class MarketingManagerSalesAddController extends AbstractController {
 	@FXML
 	void add_btn_clicked(MouseEvent event) {
 		getStationTag(stationTagComboBox);
+		Alert alert1 = new Alert(AlertType.CONFIRMATION);
+		alert1.initOwner(MainClientGUI.primaryStage);
+		alert1.getButtonTypes().remove(ButtonType.CANCEL);
+		alert1.setTitle("Add sale");
+		alert1.setHeaderText(null);
+		alert1.setContentText("The sale pattern has been successfully added");
+		alert1.show();
 
 	}
 	/**
@@ -312,6 +319,7 @@ public class MarketingManagerSalesAddController extends AbstractController {
 				@Override
 				public void run() {
 					Alert alert1 = new Alert(AlertType.INFORMATION);
+					alert1.initOwner(MainClientGUI.primaryStage);
 					alert1.setTitle("Sale added");
 					alert1.setHeaderText(null);
 					alert1.setContentText("The sale pattern added successfully");
@@ -326,6 +334,7 @@ public class MarketingManagerSalesAddController extends AbstractController {
 				@Override
 				public void run() {
 					Alert alert = new Alert(AlertType.WARNING);
+					alert.initOwner(MainClientGUI.primaryStage);
 					alert.setTitle("Wrong Input");
 					alert.setHeaderText(null);
 					alert.setContentText("Please enter vaild input");
@@ -381,6 +390,7 @@ public class MarketingManagerSalesAddController extends AbstractController {
 	 */
 	public void exitFromScreenAlert(String form, String css) {
 		Alert alert = new Alert(AlertType.WARNING, "Are you sure you want to exit?", ButtonType.YES, ButtonType.NO);
+		alert.initOwner(MainClientGUI.primaryStage);
 		alert.setTitle("Back");
 		alert.setHeaderText(null);
 		alert.showAndWait();

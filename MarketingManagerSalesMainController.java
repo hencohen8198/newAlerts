@@ -128,6 +128,7 @@ public class MarketingManagerSalesMainController extends AbstractController {
 				if (sale_selected.getGasStationTag().equals(salePattern.getGasStationTag())) {
 					if (salePattern.getStatus().equals("active")) {
 						Alert alert = new Alert(AlertType.ERROR);
+						alert.initOwner(MainClientGUI.primaryStage);
 						alert.setTitle("Cant activted");
 						alert.setHeaderText(null);
 						alert.setContentText("There is a sale already active in this gas station");
@@ -144,10 +145,18 @@ public class MarketingManagerSalesMainController extends AbstractController {
 			Message message = new Message(MessageType.UPDATEINFO,
 					"MarketingManagerSalesMainController_activiate_btn_clicked", query);
 			MainClientGUI.client.handleMessageFromClientUI(message);
+			Alert alert1 = new Alert(AlertType.CONFIRMATION);
+			alert1.initOwner(MainClientGUI.primaryStage);
+			alert1.getButtonTypes().remove(ButtonType.CANCEL);
+			alert1.setTitle("Activate sale");
+			alert1.setHeaderText(null);
+			alert1.setContentText("The sale has been successfully updated");
+			alert1.show();
 		}
 
 		else {
 			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setTitle("Cant ativted");
 			alert.setHeaderText(null);
 			alert.setContentText("This sale is already active");
@@ -180,10 +189,18 @@ public class MarketingManagerSalesMainController extends AbstractController {
 			Message message = new Message(MessageType.UPDATEINFO,
 					"MarketingManagerSalesMainController_deactivate_btn_clicked", query);
 			MainClientGUI.client.handleMessageFromClientUI(message);
+			Alert alert1 = new Alert(AlertType.CONFIRMATION);
+			alert1.initOwner(MainClientGUI.primaryStage);
+			alert1.getButtonTypes().remove(ButtonType.CANCEL);
+			alert1.setTitle("Deactive sale");
+			alert1.setHeaderText(null);
+			alert1.setContentText("The sale has been successfully deactivated");
+			alert1.show();
 		}
 
 		else {
 			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setTitle("Cant decativted");
 			alert.setHeaderText(null);
 			alert.setContentText("This sale is already Un-active");
@@ -225,6 +242,7 @@ public class MarketingManagerSalesMainController extends AbstractController {
 		} catch (Exception e) {
 			search_txt.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
 			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setTitle("Invalid input");
 			alert.setHeaderText(null);
 			alert.setContentText("Input entered is not valid please try again");
@@ -246,10 +264,10 @@ public class MarketingManagerSalesMainController extends AbstractController {
 					"/client/boundry/MarketingManagerMain.css");
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setTitle("No sale pattern selected");
 			alert.setHeaderText(null);
 			alert.setContentText("Please select sale pattern");
-			alert.initOwner(MainClientGUI.primaryStage);
 			alert.show();
 			return;
 		}
@@ -280,6 +298,7 @@ public class MarketingManagerSalesMainController extends AbstractController {
 			if (sale_selected.getStatus().equals("Un-active")) {
 				Alert alert = new Alert(AlertType.WARNING, "Are you sure you want to delete?", ButtonType.YES,
 						ButtonType.NO);
+				alert.initOwner(MainClientGUI.primaryStage);
 				alert.setTitle("Back");
 				alert.setHeaderText(null);
 				alert.showAndWait();
@@ -290,6 +309,8 @@ public class MarketingManagerSalesMainController extends AbstractController {
 							"MarketingManagerSalesMainController_delete_btn_clicked", query);
 					MainClientGUI.client.handleMessageFromClientUI(message);
 					Alert alert1 = new Alert(AlertType.CONFIRMATION);
+					alert1.initOwner(MainClientGUI.primaryStage);
+					alert1.getButtonTypes().remove(ButtonType.CANCEL);
 					alert1.setTitle("Sale deleted");
 					alert1.setHeaderText(null);
 					alert1.setContentText("The sale pattern deleted successfully");
@@ -302,6 +323,7 @@ public class MarketingManagerSalesMainController extends AbstractController {
 			} else {
 				// return;
 				Alert alert2 = new Alert(AlertType.ERROR);
+				alert2.initOwner(MainClientGUI.primaryStage);
 				alert2.setTitle("The sale is active");
 				alert2.setHeaderText(null);
 				alert2.setContentText("Active sale cannot be deleted");
@@ -310,6 +332,7 @@ public class MarketingManagerSalesMainController extends AbstractController {
 			}
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setTitle("Choose sale");
 			alert.setHeaderText(null);
 			alert.setContentText("Please choose sale");

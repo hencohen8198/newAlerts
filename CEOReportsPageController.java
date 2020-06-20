@@ -134,10 +134,10 @@ public class CEOReportsPageController extends AbstractController {
 			dia.show();
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setTitle("Choose Report ");
 			alert.setHeaderText(null);
 			alert.setContentText("YOU NEED TO CHOOSE A REPORT!");
-			alert.initOwner(MainClientGUI.primaryStage);
 			alert.show();
 		}
 	}
@@ -151,12 +151,13 @@ public class CEOReportsPageController extends AbstractController {
 	void delete_btn_clicked(MouseEvent event) {
 		if (report_table.getSelectionModel().getSelectedItem() != null) {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.getButtonTypes().remove(ButtonType.OK);
 			alert.getButtonTypes().add(ButtonType.CANCEL);
 			alert.getButtonTypes().add(ButtonType.YES);
 			alert.setTitle("Delete Repore");
 			alert.setContentText(String.format("Do you want to delete this report?"));
-			alert.initOwner(MainClientGUI.primaryStage);
+			alert.initOwner(MainClientGUI.primaryStage.getOwner());
 			Optional<ButtonType> res = alert.showAndWait();
 
 			if (res.isPresent()) {
@@ -166,22 +167,29 @@ public class CEOReportsPageController extends AbstractController {
 					Message message = new Message(MessageType.UPDATEINFO, "CEOReportsPageController_report_delete",
 							quary);
 					MainClientGUI.client.handleMessageFromClientUI(message);
+					Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+					alert2.initOwner(MainClientGUI.primaryStage);
+					alert2.getButtonTypes().remove(ButtonType.CANCEL);
+					alert2.setTitle("Report remove");
+					alert2.setContentText(String.format("The Report has been removed"));
+					alert2.initOwner(MainClientGUI.primaryStage.getOwner());
+					alert2.showAndWait();
 					refresh_btn_clicked(null);
 				} else {
 					Alert alert1 = new Alert(AlertType.ERROR);
+					alert1.initOwner(MainClientGUI.primaryStage);
 					alert1.setTitle("Delete Faild ");
 					alert1.setHeaderText(null);
-					alert1.initOwner(MainClientGUI.primaryStage);
 					alert1.setContentText("The report is not deleted!");
 					alert1.show();
 				}
 			}
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setTitle("Choose Report ");
 			alert.setHeaderText(null);
 			alert.setContentText("YOU NEED TO CHOOSE A REPORT!");
-			alert.initOwner(MainClientGUI.primaryStage);
 			alert.show();
 		}
 	}
@@ -263,6 +271,13 @@ public class CEOReportsPageController extends AbstractController {
 			filename = filename.replaceAll("\\:+", "_");
 			fileChooser.setInitialFileName(filename);
 			File file = fileChooser.showSaveDialog(MainClientGUI.primaryStage);
+			Alert alert1 = new Alert(AlertType.CONFIRMATION);
+			alert1.initOwner(MainClientGUI.primaryStage);
+			alert1.getButtonTypes().remove(ButtonType.CANCEL);
+			alert1.setTitle("Download report");
+			alert1.setHeaderText(null);
+			alert1.setContentText("The report has been successfully downloaded");
+			alert1.show();
 			try {
 				FileWriter fileWriter = new FileWriter(file);
 				content = report_table.getSelectionModel().getSelectedItem().getComment();
@@ -270,18 +285,18 @@ public class CEOReportsPageController extends AbstractController {
 				fileWriter.close();
 			} catch (Exception e) {
 				Alert alert = new Alert(AlertType.ERROR);
+				alert.initOwner(MainClientGUI.primaryStage);
 				alert.setTitle("Download Failed");
 				alert.setHeaderText(null);
 				alert.setContentText("Downloading The Report Has Failed!");
-				alert.initOwner(MainClientGUI.primaryStage);
 				alert.show();
 			}
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setTitle("Choose Report ");
 			alert.setHeaderText(null);
 			alert.setContentText("YOU NEED TO CHOOSE A REPORT!");
-			alert.initOwner(MainClientGUI.primaryStage);
 			alert.show();
 		}
 	}
@@ -307,6 +322,7 @@ public class CEOReportsPageController extends AbstractController {
 	 */
 	@FXML
 	void reports_btn_clicked(MouseEvent event) {
+		switchScenes("/client/boundry/CEOReportPageForm.fxml", "/client/boundry/CEOMenu.css");
 
 	}
 

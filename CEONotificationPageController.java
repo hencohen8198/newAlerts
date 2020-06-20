@@ -114,12 +114,13 @@ public class CEONotificationPageController extends AbstractController {
 
 		if (rates_col.getSelectionModel().getSelectedItem() != null) {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.getButtonTypes().remove(ButtonType.OK);
 			alert.getButtonTypes().add(ButtonType.CANCEL);
 			alert.getButtonTypes().add(ButtonType.YES);
 			alert.setTitle("Delete Request");
 			alert.setContentText(String.format("Do you want to delete this change request?"));
-			alert.initOwner(MainClientGUI.primaryStage);
+			alert.initOwner(MainClientGUI.primaryStage.getOwner());
 			Optional<ButtonType> res = alert.showAndWait();
 
 			if (res.isPresent()) {
@@ -139,22 +140,29 @@ public class CEONotificationPageController extends AbstractController {
 							quary);
 					MainClientGUI.client.handleMessageFromClientUI(message);
 					switchScenes("/client/boundry/CEONotificationPageForm.fxml", "/client/boundry/CEOMenu.css");
+					Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+					alert2.initOwner(MainClientGUI.primaryStage);
+					alert2.getButtonTypes().remove(ButtonType.CANCEL);
+					alert2.setTitle("Request remove");
+					alert2.setContentText(String.format("The Request has been removed"));
+					alert2.initOwner(MainClientGUI.primaryStage.getOwner());
+					alert2.showAndWait();
 
 				} else {
 					Alert alert1 = new Alert(AlertType.ERROR);
+					alert.initOwner(MainClientGUI.primaryStage);
 					alert1.setTitle("Delete Faild ");
 					alert1.setHeaderText(null);
 					alert1.setContentText("The request has not been deleted!");
-					alert1.initOwner(MainClientGUI.primaryStage);
 					alert1.show();
 				}
 			}
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setTitle("Choose Line ");
 			alert.setHeaderText(null);
 			alert.setContentText("YOU NEED TO CHOOSE A CHANGE REQUEST!");
-			alert.initOwner(MainClientGUI.primaryStage);
 			alert.show();
 		}
 	}
@@ -173,12 +181,13 @@ public class CEONotificationPageController extends AbstractController {
 		// check that the you choose a line
 		if (rates_col.getSelectionModel().getSelectedItem() != null) {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.getButtonTypes().remove(ButtonType.OK);
 			alert.getButtonTypes().add(ButtonType.CANCEL);
 			alert.getButtonTypes().add(ButtonType.YES);
 			alert.setTitle("Change Request");
 			alert.setContentText(String.format("Do you want to change this rate"));
-			alert.initOwner(MainClientGUI.primaryStage);
+			alert.initOwner(MainClientGUI.primaryStage.getOwner());
 			Optional<ButtonType> res = alert.showAndWait();
 
 			if (res.isPresent()) {
@@ -206,24 +215,31 @@ public class CEONotificationPageController extends AbstractController {
 					Message message1 = new Message(MessageType.UPDATEINFO, "CEONotificationPageController_rate_delete",
 							quary1);
 					MainClientGUI.client.handleMessageFromClientUI(message1);
-
 					switchScenes("/client/boundry/CEONotificationPageForm.fxml", "/client/boundry/CEOMenu.css");
+					Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+					alert2.initOwner(MainClientGUI.primaryStage);
+					alert2.getButtonTypes().remove(ButtonType.CANCEL);
+					alert2.setTitle("Request approved");
+					alert2.setContentText(String.format("The Request has been approved"));
+					alert2.initOwner(MainClientGUI.primaryStage.getOwner());
+					alert2.showAndWait();
+
 
 				} else {
 					Alert alert1 = new Alert(AlertType.ERROR);
+					alert1.initOwner(MainClientGUI.primaryStage);
 					alert1.setTitle("change Faild ");
 					alert1.setHeaderText(null);
 					alert1.setContentText("The request is not changed!");
-					alert1.initOwner(MainClientGUI.primaryStage);
 					alert1.show();
 				}
 			}
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(MainClientGUI.primaryStage);
 			alert.setTitle("Choose Line ");
 			alert.setHeaderText(null);
 			alert.setContentText("YOU NEED TO CHOOSE A CHANGE REQUEST!");
-			alert.initOwner(MainClientGUI.primaryStage);
 			alert.show();
 		}
 
@@ -288,6 +304,7 @@ public class CEONotificationPageController extends AbstractController {
 	 */
 	@FXML
 	void notification_btn_clicked(MouseEvent event) {
+		switchScenes("/client/boundry/CEONotificationPageForm.fxml", "/client/boundry/CEOMenu.css");
 
 	}
 
