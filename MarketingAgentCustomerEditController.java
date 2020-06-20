@@ -690,5 +690,6 @@ public class MarketingAgentCustomerEditController extends AbstractController {
 			cvv_txt.setEditable(true);
 		}
 		editFlag = false;
+		String strcheck=new String();
 	}
 }
